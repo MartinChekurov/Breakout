@@ -1,3 +1,6 @@
+#ifndef SPRITE_RENDERER_H
+#define SPRITE_RENDERER_H
+
 #define GLEW_STATIC
 #include "glew.h"
 #include "Shader.h"
@@ -14,3 +17,5 @@ private:
     GLuint quadVAO;
     void initRenderData();
 };
+
+#endif

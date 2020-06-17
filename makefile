@@ -8,7 +8,10 @@ SRC = Src/main\
 	  Src/Texture/Texture\
 	  Src/ResourceManager/ResourceManager\
 	  Src/SpriteRenderer/SpriteRenderer\
-	  Src/StbImage/stb_image
+	  Src/StbImage/stb_image\
+	  Src/GameLevel/GameLevel\
+	  Src/GameObject/GameObject\
+	  Src/BallObject/BallObject
 
 ### OBJECTS ###
 OBJ = $(addsuffix .o, $(addprefix $(BUILD)/, $(SRC)))
@@ -22,7 +25,10 @@ INC = -ID:/Development/OpenGL/Glfw/include/GLFW\
 	  -ISrc/Texture\
 	  -ISrc/ResourceManager\
 	  -ISrc/SpriteRenderer\
-	  -ISrc/StbImage
+	  -ISrc/StbImage\
+	  -ISrc/GameLevel\
+	  -ISrc/GameObject\
+	  -ISrc/BallObject
 
 ### LINKER FLAGS ###
 LDFLAGS = -LD:/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32 -lglew32s\
