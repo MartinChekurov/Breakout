@@ -1,14 +1,16 @@
-Build/Src/main.o: Src/main.cpp \
- D:/Development/OpenGL/Glew/glew-2.1.0/include/GL/glew.h \
- c:\mingw\include\inttypes.h c:\mingw\include\_mingw.h \
+Build/Src/main.o: Src/main.cpp Src/Errors/Errors.h \
+ c:\mingw\include\stdio.h c:\mingw\include\_mingw.h \
  c:\mingw\include\msvcrtver.h c:\mingw\include\w32api.h \
  c:\mingw\include\sdkddkver.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\stdint.h \
- c:\mingw\include\stdint.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\stddef.h \
- c:\mingw\include\gl\glu.h c:\mingw\include\gl\gl.h \
- D:/Development/OpenGL/Glfw/include/GLFW/glfw3.h Src/Game/Game.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
+ c:\mingw\include\sys/types.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
+ D:/Development/OpenGL/Glew/glew-2.1.0/include/GL/glew.h \
+ c:\mingw\include\inttypes.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdint.h \
+ c:\mingw\include\stdint.h c:\mingw\include\gl\glu.h \
+ c:\mingw\include\gl\gl.h D:/Development/OpenGL/Glfw/include/GLFW/glfw3.h \
+ Src/Game/Game.h c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_algobase.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++config.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\os_defines.h \
@@ -49,7 +51,7 @@ Build/Src/main.o: Src/main.cpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hash_bytes.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\range_access.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc \
- Src/GameLevel/GameLevel.h \
+ Src/BallObject/BallObject.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/glm.hpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/_fixes.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cmath c:\mingw\include\math.h \
@@ -199,8 +201,8 @@ Build/Src/main.o: Src/main.cpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/type_half.inl \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/integer.hpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/func_integer.inl \
- Src/GameObject/GameObject.h Src/Texture/Texture.h \
- Src/SpriteRenderer/SpriteRenderer.h Src/Shader/Shader.h \
+ Src/Texture/Texture.h Src/SpriteRenderer/SpriteRenderer.h \
+ Src/Shader/Shader.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/gtc/type_ptr.hpp \
  d:\development\opengl\glm\glm-0.9.9.8\glm\gtc\quaternion.hpp \
  d:\development\opengl\glm\glm-0.9.9.8\glm\gtc\constants.hpp \
@@ -253,18 +255,8 @@ Build/Src/main.o: Src/main.cpp \
  c:\mingw\include\string.h c:\mingw\include\strings.h \
  c:\mingw\include\wchar.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/gtc/type_ptr.inl \
- Src/ResourceManager/ResourceManager.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\map \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tree.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_function.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\backward\binders.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ext\aligned_buffer.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_map.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\tuple \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\utility \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_relops.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\array \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stdexcept \
+ Src/GameObject/GameObject.h Src/ResourceManager/ResourceManager.h \
+ Src/GameLevel/GameLevel.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stringfwd.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\char_traits.h \
@@ -272,8 +264,6 @@ Build/Src/main.o: Src/main.cpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cwchar \
  c:\mingw\include\wchar.h c:\mingw\include\wctype.h \
  c:\mingw\include\sys\types.h c:\mingw\include\stdio.h \
- c:\mingw\include\sys/types.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
  c:\mingw\include\stdlib.h c:\mingw\include\direct.h \
  c:\mingw\include\sys/stat.h c:\mingw\include\io.h \
  c:\mingw\include\stdint.h c:\mingw\include\time.h \
@@ -287,6 +277,8 @@ Build/Src/main.o: Src/main.cpp \
  c:\mingw\include\ctype.h c:\mingw\include\wctype.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ostream_insert.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\cxxabi_forced.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_function.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\backward\binders.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_string.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ext\atomicity.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\gthr.h \
@@ -297,8 +289,6 @@ Build/Src/main.o: Src/main.cpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cstdlib \
  c:\mingw\include\stdlib.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cstdio \
- c:\mingw\include\stdio.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cerrno \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_string.tcc \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\uses_allocator.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_multimap.h
+ Src/Json/Json.h

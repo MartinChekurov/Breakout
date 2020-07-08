@@ -164,8 +164,10 @@ Build/Src/GameObject/GameObject.o: Src/GameObject/GameObject.cpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/type_half.inl \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/integer.hpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/func_integer.inl \
- Src/Texture/Texture.h Src/SpriteRenderer/SpriteRenderer.h \
- Src/Shader/Shader.h \
+ Src/Texture/Texture.h Src/Errors/Errors.h c:\mingw\include\stdio.h \
+ c:\mingw\include\sys/types.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
+ Src/SpriteRenderer/SpriteRenderer.h Src/Shader/Shader.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/gtc/type_ptr.hpp \
  d:\development\opengl\glm\glm-0.9.9.8\glm\gtc\quaternion.hpp \
  d:\development\opengl\glm\glm-0.9.9.8\glm\gtc\constants.hpp \

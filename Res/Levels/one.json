@@ -1,0 +1,812 @@
+{
+	"tiles" : [
+		[
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		],
+		[
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : true,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : true,			
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			},
+			{	
+				"visible" : false,
+				"solid" : false,
+				"color" : {
+					"red" : 0.0,
+					"green" : 0.6,
+					"blue": 0.8
+				}
+			}
+		]
+	]
+}

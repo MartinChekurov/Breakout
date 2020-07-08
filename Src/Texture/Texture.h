@@ -2,26 +2,30 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include "Errors.h"
 #include "glew.h"
 
 class Texture2D
 {
 public:
-    GLuint id;
-    
-    GLuint width, height;
-   
-    GLuint internalFormat;
-    GLuint imageFormat;
-   
-    GLuint wrapS; 
-    GLuint wrapT; 
-    GLuint filterMin;
-    GLuint filterMax; 
-    
-    Texture2D();
-    void generate(GLuint width, GLuint height, unsigned char* data);
+	Texture2D();
+	Texture2D(const GLchar* file);
+	
+	Error setFile(const GLchar* file);	
+	Error load();
+    Error generate();
     void bind() const;
+
+	GLuint getId() const;
+	GLuint getWidth() const;
+	GLuint getHeight() const;
+
+private:
+	GLuint id;
+	GLuint width, height;
+
+	const GLchar* textureFile;
+	const GLubyte* textureData;
 };
 
 #endif

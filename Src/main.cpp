@@ -1,3 +1,4 @@
+#include "Errors.h"
 #define GLM_FORCE_CTOR_INIT
 #define GLEW_STATIC
 #include "glew.h"
@@ -13,9 +14,9 @@ const GLuint SCREEN_WIDTH = 800;
 const GLuint SCREEN_HEIGHT = 600;
 
 Game Breakout(SCREEN_WIDTH, SCREEN_HEIGHT);
-
 int main(int argc, char *argv[])
 {
+	Error status = ERR_NO_ERR;
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -38,7 +39,7 @@ int main(int argc, char *argv[])
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Initialize game
-    Breakout.init();
+    CHECK(Breakout.init());
 
     // DeltaTime variables
     GLfloat deltaTime = 0.0f;
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
     }
 
     // Delete all resources as loaded using the resource manager
-    ResourceManager::clear();
+//    ResourceManager::clear();
 
     glfwTerminate();
     return 0;

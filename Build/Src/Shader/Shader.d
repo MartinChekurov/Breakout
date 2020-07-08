@@ -1,12 +1,15 @@
 Build/Src/Shader/Shader.o: Src/Shader/Shader.cpp Src/Shader/Shader.h \
- D:/Development/OpenGL/Glew/glew-2.1.0/include/GL/glew.h \
- c:\mingw\include\inttypes.h c:\mingw\include\_mingw.h \
+ Src/Errors/Errors.h c:\mingw\include\stdio.h c:\mingw\include\_mingw.h \
  c:\mingw\include\msvcrtver.h c:\mingw\include\w32api.h \
  c:\mingw\include\sdkddkver.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\stdint.h \
- c:\mingw\include\stdint.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\stddef.h \
- c:\mingw\include\gl\glu.h c:\mingw\include\gl\gl.h \
+ c:\mingw\include\sys/types.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
+ D:/Development/OpenGL/Glew/glew-2.1.0/include/GL/glew.h \
+ c:\mingw\include\inttypes.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdint.h \
+ c:\mingw\include\stdint.h c:\mingw\include\gl\glu.h \
+ c:\mingw\include\gl\gl.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/glm.hpp \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/detail/_fixes.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cmath \
@@ -215,8 +218,8 @@ Build/Src/Shader/Shader.o: Src/Shader/Shader.cpp Src/Shader/Shader.h \
  c:\mingw\include\string.h c:\mingw\include\strings.h \
  c:\mingw\include\wchar.h \
  D:/Development/OpenGL/Glm/glm-0.9.9.8/glm/gtc/type_ptr.inl \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iostream \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ostream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\fstream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\istream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ios \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iosfwd \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stringfwd.h \
@@ -225,8 +228,6 @@ Build/Src/Shader/Shader.o: Src/Shader/Shader.cpp Src/Shader/Shader.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cwchar \
  c:\mingw\include\wchar.h c:\mingw\include\wctype.h \
  c:\mingw\include\sys\types.h c:\mingw\include\stdio.h \
- c:\mingw\include\sys/types.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
  c:\mingw\include\stdlib.h c:\mingw\include\direct.h \
  c:\mingw\include\sys/stat.h c:\mingw\include\io.h \
  c:\mingw\include\stdint.h c:\mingw\include\time.h \
@@ -281,7 +282,6 @@ Build/Src/Shader/Shader.o: Src/Shader/Shader.cpp Src/Shader/Shader.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cstdlib \
  c:\mingw\include\stdlib.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cstdio \
- c:\mingw\include\stdio.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cerrno \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\functional_hash.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hash_bytes.h \
@@ -300,6 +300,11 @@ Build/Src/Shader/Shader.o: Src/Shader/Shader.cpp Src/Shader/Shader.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\ctype_inline.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_facets.tcc \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_ios.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ostream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ostream.tcc \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\istream \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\basic_file.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++io.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\fstream.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iostream

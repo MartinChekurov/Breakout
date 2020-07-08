@@ -10,12 +10,25 @@
 
 
 GameObject::GameObject() 
-    : Position(0, 0), Size(1, 1), Velocity(0.0f), Color(1.0f), Rotation(0.0f), Sprite(), IsSolid(false), Destroyed(false) { }
+    : position(0, 0), size(1, 1), velocity(0.0f), color(1.0f), rotation(0.0f), sprite(), isSolid(false), destroyed(false) { }
 
 GameObject::GameObject(glm::vec2 pos, glm::vec2 size, Texture2D sprite, glm::vec3 color, glm::vec2 velocity) 
-    : Position(pos), Size(size), Velocity(velocity), Color(color), Rotation(0.0f), Sprite(sprite), IsSolid(false), Destroyed(false) { }
+    : position(pos), size(size), velocity(velocity), color(color), rotation(0.0f), sprite(sprite), isSolid(false), destroyed(false) { }
 
-void GameObject::Draw(SpriteRenderer &renderer)
+void GameObject::draw(SpriteRenderer &renderer)
 {
-    renderer.DrawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
+    renderer.drawSprite(this->sprite, this->position, this->size, this->rotation, this->color);
+}
+void GameObject::setDirection()
+{
+	if (this->velocity.x >= 0) {
+		this->directionX = RIGHT;
+	} else {
+		this->directionX = LEFT;
+	}
+	if (this->velocity.y >= 0) {
+		this->directionY = DOWN;
+	} else {
+		this->directionY = UP;
+	}
 }

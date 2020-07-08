@@ -1,100 +1,44 @@
 #include "ResourceManager.h"
-#include "stb_image.h"
-
-#include <iostream>
-#include <sstream>
-#include <fstream>
-
-std::map<std::string, Texture2D> ResourceManager::textures;
-std::map<std::string, Shader> ResourceManager::shaders;
+#include "Errors.h"
+#include "Texture.h"
+#include <vector>
 
 
-Shader ResourceManager::loadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
+static std::vector<Shader> Shaders{1};
+static std::vector<Texture2D> Textures{5};
+
+Error ResourceManagerLoadShader(const Shader& shader, enum ResouceManagerShader id)
 {
-    shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
-    return shaders[name];
+	CHECK_ERR(Shaders.size() <= id, ERR_BOUNDS);
+	Shaders.insert(Shaders.begin() + id, shader);
+	return ERR_NO_ERR;
 }
 
-Shader ResourceManager::getShader(std::string name)
+Shader* ResourceManagerGetShader(enum ResouceManagerShader id)
 {
-    return shaders[name];
+	CHECK_ERR(Shaders.size() <= id, nullptr);
+	return &Shaders[id];
 }
 
-Texture2D ResourceManager::loadTexture(const GLchar *file, GLboolean alpha, std::string name)
-{
-    textures[name] = loadTextureFromFile(file, alpha);
-    return textures[name];
+Error ResourceManagerLoadTexture(const Texture2D& texture, enum ResourceManagerTexture2D id)
+{	CHECK_ERR(Textures.size() <= id, ERR_BOUNDS);
+	Textures.insert(Textures.begin() + id, texture);
+	return ERR_NO_ERR;
 }
 
-Texture2D ResourceManager::getTexture(std::string name)
+Texture2D* ResourceManagerGetTexture(enum ResourceManagerTexture2D id)
 {
-    return textures[name];
+	CHECK_ERR(Textures.size() <= id, nullptr);
+	return &Textures[id];
 }
 
-void ResourceManager::clear()
+void ResourceManagerClear()
 {
-    for (auto iter : shaders)
-        glDeleteProgram(iter.second.getId());
-    for (auto iter : textures)
-        glDeleteTextures(1, &iter.second.id);
-}
-
-Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)
-{
-    std::string vertexCode;
-    std::string fragmentCode;
-    std::string geometryCode;
-    try {
-        
-        std::ifstream vertexShaderFile(vShaderFile);
-        std::ifstream fragmentShaderFile(fShaderFile);
-        std::stringstream vShaderStream, fShaderStream;
-        
-        vShaderStream << vertexShaderFile.rdbuf();
-        fShaderStream << fragmentShaderFile.rdbuf();
-        
-        vertexShaderFile.close();
-        fragmentShaderFile.close();
-       
-        vertexCode = vShaderStream.str();
-        fragmentCode = fShaderStream.str();
-
-        if (gShaderFile != nullptr) {
-            std::ifstream geometryShaderFile(gShaderFile);
-            std::stringstream gShaderStream;
-            gShaderStream << geometryShaderFile.rdbuf();
-            geometryShaderFile.close();
-            geometryCode = gShaderStream.str();
-        }
-    }
-    catch (std::exception e) {
-        std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
-    }
-    const GLchar *vShaderCode = vertexCode.c_str();
-    const GLchar *fShaderCode = fragmentCode.c_str();
-    const GLchar *gShaderCode = geometryCode.c_str();
-
-    Shader shader;
-    shader.compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
-    return shader;
-}
-
-Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alpha)
-{   
-    int desiderChannels = 0;
-    Texture2D texture;
-    if (alpha) {
-        texture.internalFormat = GL_RGBA;
-        texture.imageFormat = GL_RGBA;
-    }
-
-    int width, height;
-    stbi_set_flip_vertically_on_load(1);
-    unsigned char* image = stbi_load(file, &width, &height, &desiderChannels, 4);
-    texture.generate(width, height, image);
-    stbi_image_free(image);
-    // unsigned char* image = SOIL_load_image(file, &width, &height, 0, texture.imageFormat == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
-    // texture.generate(width, height, image);
-    // SOIL_free_image_data(image);
-    return texture;
+	GLuint id = 0;
+    for (Shader shader : Shaders)
+       glDeleteProgram(shader.getId());
+    for (Texture2D texture : Textures) {
+		id = texture.getId();
+        glDeleteTextures(1, &id);
+	}
 }

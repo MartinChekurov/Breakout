@@ -1,130 +1,193 @@
 #include "Shader.h"
+#include "Errors.h"
+#include <fstream>
 #include <iostream>
+#include <string>
 
-Shader &Shader::use()
+Shader::Shader()
+	: Shader{nullptr, nullptr}
 {
-    glUseProgram(id);
-    return *this;
+	
 }
 
-GLuint Shader::getId()
+Shader::Shader(const GLchar* vFile, const GLchar* fFile)
+	: id{0}, vertexFile{vFile}, fragmentFile{fFile}, vertexCode{nullptr}, fragmentCode{nullptr}
 {
-    return id;
+	
 }
 
-void Shader::compile(const GLchar* vertexSource, const GLchar* fragmentSource, const GLchar* geometrySource)
+Error Shader::setFiles(const GLchar* vertexFile, const GLchar* fragmentFile)
 {
-    GLuint sVertex, sFragment, gShader;
-    
-    sVertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(sVertex, 1, &vertexSource, NULL);
-    glCompileShader(sVertex);
-    checkCompileErrors(sVertex, SHADER);
-    
-    sFragment = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(sFragment, 1, &fragmentSource, NULL);
-    glCompileShader(sFragment);
-    checkCompileErrors(sFragment, SHADER);
-
-    if (geometrySource) {
-        gShader = glCreateShader(GL_GEOMETRY_SHADER);
-        glShaderSource(gShader, 1, &geometrySource, NULL);
-        glCompileShader(gShader);
-        checkCompileErrors(gShader, SHADER);
-    }
-    
-    id = glCreateProgram();
-    glAttachShader(id, sVertex);
-    glAttachShader(id, sFragment);
-    if (geometrySource) {
-        glAttachShader(id, gShader);
-    }
-    glLinkProgram(id);
-    checkCompileErrors(id, PROGRAM);
-    glDeleteShader(sVertex);
-    glDeleteShader(sFragment);
-    if (geometrySource) {
-        glDeleteShader(gShader);
-    }
+	CHECK_ERR(!vertexFile || !fragmentFile, ERR_INV_PAR);
+	this->vertexFile = vertexFile;
+	this->fragmentFile = fragmentFile;	
+	return ERR_NO_ERR;
 }
 
-void Shader::setFloat(const GLchar *name, GLfloat value, GLboolean useShader)
+Error Shader::load()
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!this->vertexFile || !this->fragmentFile, ERR_INV_VAL);
+
+	std::string vertexCode, fragmentCode, line;
+	std::ifstream iVertexFile(this->vertexFile), iFragmentFile(this->fragmentFile);
+
+	CHECK_ERR(iVertexFile.fail() || iFragmentFile.fail(), ERR_ISTREAM);
+
+	while(std::getline(iVertexFile, line)) {
+
+		vertexCode += line;
+		vertexCode += "\n";
+	}	
+	while(std::getline(iFragmentFile, line)) {
+
+		fragmentCode += line;
+		fragmentCode += "\n";
+	}	
+
+	iVertexFile.close();
+	iFragmentFile.close();
+
+	CHECK_ERR(!fragmentCode.length() || !vertexCode.length(), ERR_INV_VAL);
+
+	this->vertexCode = vertexCode.c_str();
+	this->fragmentCode = fragmentCode.c_str();
+	return ERR_NO_ERR;
+}
+
+Error Shader::compile()
+{
+    GLuint vertex = 0, fragment = 0;
+   	Error status = ERR_NO_ERR;
+
+	CHECK_ERR(!this->fragmentCode || !this->vertexCode ||
+			  !strlen(this->fragmentCode) || !strlen(this->vertexCode), ERR_INV_VAL);
+
+    vertex = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertex, 1, &this->vertexCode, NULL);
+    glCompileShader(vertex);
+	CHECK(this->checkCompilation(vertex));
+
+    fragment = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragment, 1, &this->fragmentCode, NULL);
+    glCompileShader(fragment);
+    CHECK(this->checkCompilation(fragment));
+
+    this->id = glCreateProgram();
+    glAttachShader(this->id, vertex);
+    glAttachShader(this->id, fragment);
+
+    glLinkProgram(this->id);
+    CHECK(checkLinking(this->id));
+
+    glDeleteShader(vertex);
+    glDeleteShader(fragment);
+	return ERR_NO_ERR;
+}
+
+void Shader::use() const
+{
+    glUseProgram(this->id);
+}
+
+Error Shader::setFloat(const GLchar *name, GLfloat value)
+{
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform1f(glGetUniformLocation(this-> id, name), value);
+	return ERR_NO_ERR;
 }
 
-void Shader::setInteger(const GLchar *name, GLint value, GLboolean useShader)
+Error Shader::setInteger(const GLchar *name, GLint value)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform1i(glGetUniformLocation(this-> id, name), value);
+	return ERR_NO_ERR;
 }
 
-void Shader::setVector2f(const GLchar *name, GLfloat x, GLfloat y, GLboolean useShader)
+Error Shader::setVector2f(const GLchar *name, GLfloat x, GLfloat y)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform2f(glGetUniformLocation(this-> id, name), x, y);
+	return ERR_NO_ERR;
 }
 
-void Shader::setVector2f(const GLchar *name, const glm::vec2 &value, GLboolean useShader)
+Error Shader::setVector2f(const GLchar *name, const glm::vec2 &value)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform2f(glGetUniformLocation(this-> id, name), value.x, value.y);
+	return ERR_NO_ERR;
 }
 
-void Shader::setVector3f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z, GLboolean useShader)
+Error Shader::setVector3f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform3f(glGetUniformLocation(this-> id, name), x, y, z);
+	return ERR_NO_ERR;
 }
 
-void Shader::setVector3f(const GLchar *name, const glm::vec3 &value, GLboolean useShader)
+Error Shader::setVector3f(const GLchar *name, const glm::vec3 &value)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform3f(glGetUniformLocation(this-> id, name), value.x, value.y, value.z);
+	return ERR_NO_ERR;
 }
 
-void Shader::setVector4f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w, GLboolean useShader)
+Error Shader::setVector4f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform4f(glGetUniformLocation(this-> id, name), x, y, z, w);
+	return ERR_NO_ERR;
 }
-void Shader::setVector4f(const GLchar *name, const glm::vec4 &value, GLboolean useShader)
+
+Error Shader::setVector4f(const GLchar *name, const glm::vec4 &value)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniform4f(glGetUniformLocation(this-> id, name), value.x, value.y, value.z, value.w);
+	return ERR_NO_ERR;
 }
 
-void Shader::setMatrix4(const GLchar *name, const glm::mat4 &matrix, GLboolean useShader)
+Error Shader::setMatrix4(const GLchar *name, const glm::mat4 &matrix)
 {
-	if (useShader)
-        this->use();
+	CHECK_ERR(!name, ERR_INV_PAR);
+	this->use();
     glUniformMatrix4fv(glGetUniformLocation(this-> id, name), 1, GL_FALSE, glm::value_ptr(matrix));
+	return ERR_NO_ERR;
 }
 
-void Shader::checkCompileErrors(GLuint object, CompileType type)
+GLuint Shader::getId() const
 {
-    GLint success;
-    GLchar infoLog[1024];
-    if (type != PROGRAM) {
-        glGetShaderiv(object, GL_COMPILE_STATUS, &success);
-        if (!success) {
-            glGetShaderInfoLog(object, 1024, NULL, infoLog);
-            std::cout << "\nShader compile error type: " << type << "\n" << infoLog << std::endl;
-        }
-    } else {
-        glGetProgramiv(object, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(object, 1024, NULL, infoLog);
-            std::cout << "\nProgram compile error type: " << type << "\n" << infoLog << std::endl;
-        }
-    }
+    return this->id;
+}
+
+Error Shader::checkCompilation(GLuint shader)
+{
+    GLint success = 0;
+    GLchar error[1024]{};
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(shader, 1024, NULL, error);
+		printf("\nCompilation error: %s", error);
+		CHECK_ERR(error, ERR_SHADER_COMPILE);
+	}
+	return ERR_NO_ERR;
+}
+
+Error Shader::checkLinking(GLuint program)
+{
+    GLint success = 0;
+    GLchar error[1024]{};
+	glGetProgramiv(program, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(program, 1024, NULL, error);
+		printf("\nLinking error: %s", error);
+		CHECK_ERR(error, ERR_SHADER_LINK);
+	}
+	return ERR_NO_ERR;
 }

@@ -1,41 +1,30 @@
-/*******************************************************************
-** This code is part of Breakout.
-**
-** Breakout is free software: you can redistribute it and/or modify
-** it under the terms of the CC BY 4.0 license as published by
-** Creative Commons, either version 4 of the License, or (at your
-** option) any later version.
-******************************************************************/
 #ifndef GAMELEVEL_H
 #define GAMELEVEL_H
-#include <vector>
 
+#include <vector>
+#include <string>
+
+#include "Errors.h"
 #include "glew.h"
 #include "glm.hpp"
-
 #include "GameObject.h"
 #include "SpriteRenderer.h"
 #include "ResourceManager.h"
+#include "Json.h"
 
-
-/// GameLevel holds all Tiles as part of a Breakout level and 
-/// hosts functionality to Load/render levels from the harddisk.
 class GameLevel
 {
 public:
-    // Level state
     std::vector<GameObject> Bricks;
-    // Constructor
+
     GameLevel() { }
-    // Loads level from file
-    void      Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight);
-    // Render level
-    void      Draw(SpriteRenderer &renderer);
-    // Check if the level is completed (all non-solid tiles are destroyed)
-    GLboolean IsCompleted();
+
+    Error load(const GLchar *file, GLuint levelWidth, GLuint levelHeight);
+    void draw(SpriteRenderer &renderer);
+    GLboolean isCompleted();
+
 private:
-    // Initialize level from tile data
-    void      init(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLuint levelHeight);
+    Error init(JSON_Value* level, GLuint levelWidth, GLuint levelHeight);
 };
 
 #endif

@@ -1,93 +1,94 @@
-/*******************************************************************
-** This code is part of Breakout.
-**
-** Breakout is free software: you can redistribute it and/or modify
-** it under the terms of the CC BY 4.0 license as published by
-** Creative Commons, either version 4 of the License, or (at your
-** option) any later version.
-******************************************************************/
 #include "GameLevel.h"
+#include "Errors.h"
+#include "Json.h"
 
 #include <fstream>
 #include <sstream>
+#include <string.h>
+#include <iostream>
 
-
-void GameLevel::Load(const GLchar *file, GLuint levelWidth, GLuint levelHeight)
+Error GameLevel::load(const GLchar *file, GLuint levelWidth, GLuint levelHeight)
 {
-    // Clear old data
+	JSON_Value* level = nullptr;
+
+	CHECK_ERR(!file, ERR_INV_PAR);
+	CHECK_ERR(!(level = json_parse_file(file)), ERR_INV_VAL);
+
     this->Bricks.clear();
-    // Load from file
-    GLuint tileCode;
-    GameLevel level;
-    std::string line;
-    std::ifstream fstream(file);
-    std::vector<std::vector<GLuint>> tileData;
-    if (fstream)
-    {
-        while (std::getline(fstream, line)) // Read each line from level file
-        {
-            std::istringstream sstream(line);
-            std::vector<GLuint> row;
-            while (sstream >> tileCode) // Read each word seperated by spaces
-                row.push_back(tileCode);
-            tileData.push_back(row);
-        }
-        if (tileData.size() > 0)
-            this->init(tileData, levelWidth, levelHeight);
-    }
+	CHECK(this->init(level, levelWidth, levelHeight));
+	json_value_free(level);
+	return ERR_NO_ERR;
 }
 
-void GameLevel::Draw(SpriteRenderer &renderer)
+void GameLevel::draw(SpriteRenderer &renderer)
 {
-    for (GameObject &tile : this->Bricks)
-        if (!tile.Destroyed)
-            tile.Draw(renderer);
+    for (GameObject &tile : this->Bricks) {
+        if (!tile.destroyed) {
+            tile.draw(renderer);
+		}
+	}
 }
 
-GLboolean GameLevel::IsCompleted()
+GLboolean GameLevel::isCompleted()
 {
-    for (GameObject &tile : this->Bricks)
-        if (!tile.IsSolid && !tile.Destroyed)
+    for (GameObject &tile : this->Bricks) {
+        if (!tile.isSolid && !tile.destroyed) {
             return GL_FALSE;
+		}
+	}
     return GL_TRUE;
 }
 
-void GameLevel::init(std::vector<std::vector<GLuint>> tileData, GLuint levelWidth, GLuint levelHeight)
+Error GameLevel::init(JSON_Value* level, GLuint levelWidth, GLuint levelHeight)
 {
-    // Calculate dimensions
-    GLuint height = tileData.size();
-    GLuint width = tileData[0].size(); // Note we can index vector at [0] since this function is only called if height > 0
-    GLfloat unit_width = levelWidth / static_cast<GLfloat>(width), unit_height = levelHeight / height; 
-    // Initialize level tiles based on tileData		
-    for (GLuint y = 0; y < height; ++y)
-    {
-        for (GLuint x = 0; x < width; ++x)
-        {
-            // Check block type from level data (2D level array)
-            if (tileData[y][x] == 1) // Solid
-            {
-                glm::vec2 pos(unit_width * x, unit_height * y);
-                glm::vec2 size(unit_width, unit_height);
-                GameObject obj(pos, size, ResourceManager::getTexture("block_solid"), glm::vec3(0.8f, 0.8f, 0.7f));
-                obj.IsSolid = GL_TRUE;
-                this->Bricks.push_back(obj);
-            }
-            else if (tileData[y][x] > 1)	// Non-solid; now determine its color based on level data
-            {
-                glm::vec3 color = glm::vec3(1.0f); // original: white
-                if (tileData[y][x] == 2)
-                    color = glm::vec3(0.2f, 0.6f, 1.0f);
-                else if (tileData[y][x] == 3)
-                    color = glm::vec3(0.0f, 0.7f, 0.0f);
-                else if (tileData[y][x] == 4)
-                    color = glm::vec3(0.8f, 0.8f, 0.4f);
-                else if (tileData[y][x] == 5)
-                    color = glm::vec3(1.0f, 0.5f, 0.0f);
+	JSON_Object* root = nullptr;
+	JSON_Array* tilesRows = nullptr, *tilesColumn = nullptr;
+	GLuint rows = 0, columns = 0;
+	GLfloat tileHeight = 0;
 
-                glm::vec2 pos(unit_width * x, unit_height * y);
-                glm::vec2 size(unit_width, unit_height);
-                this->Bricks.push_back(GameObject(pos, size, ResourceManager::getTexture("block"), color));
-            }
-        }
-    }
+	CHECK_ERR(!level, ERR_INV_PAR);
+	CHECK_ERR(!(root = json_value_get_object(level)), ERR_INV_VAL);
+	CHECK_ERR(!(tilesRows = json_object_get_array(root, "tiles")), ERR_INV_VAL);
+
+	rows = json_array_get_count(tilesRows);
+	tileHeight = levelHeight/rows;
+	GLfloat columnsWidth[rows];
+
+	for (GLuint y = 0 ; y < rows ; y++) {
+		CHECK_ERR(!(tilesColumn = json_array_get_array(tilesRows, y)), ERR_INV_VAL);
+		columns = json_array_get_count(tilesColumn);
+		columnsWidth[y] = (GLfloat)levelWidth/(GLfloat)columns;
+		for (GLuint x = 0 ; x < columns ; x++) {
+			GLuint isSolid = 0, visible = 0;
+			GLfloat red = 0.0f, green = 0.0f, blue = 0.0f;
+			JSON_Object* color = nullptr;
+			JSON_Object* tile = json_array_get_object(tilesColumn, x);
+			CHECK_ERR(!tile, ERR_INV_PAR);
+
+			color = json_object_get_object(tile, "color");
+			CHECK_ERR(!color, ERR_INV_VAL);
+
+			isSolid = json_object_get_boolean(tile, "solid");
+			visible = json_object_get_boolean(tile, "visible");
+			red = json_object_get_number(color, "red");
+			green = json_object_get_number(color, "green");
+			blue = json_object_get_number(color, "blue");
+
+			glm::vec2 pos(columnsWidth[y] * x, tileHeight * y);
+			glm::vec2 size(columnsWidth[y], tileHeight);
+			glm::vec3 tileColor = glm::vec3(1.0f);
+			
+			if (visible) {
+				if (isSolid) {
+					GameObject obj(pos, size, *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_SOLID_BLOCK));
+					obj.isSolid = GL_TRUE;
+					this->Bricks.push_back(obj);
+				} else {
+					tileColor = glm::vec3(red, green, blue);
+					this->Bricks.push_back(GameObject(pos, size, *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_BLOCK), tileColor));
+				}
+			}
+		}
+	}
+	return ERR_NO_ERR;
 }
