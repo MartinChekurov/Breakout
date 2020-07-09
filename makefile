@@ -18,9 +18,9 @@ SRC = Src/main\
 OBJ = $(addsuffix .o, $(addprefix $(BUILD)/, $(SRC)))
 
 ### INCLUDES ###
-INC = -ID:/Development/OpenGL/Glfw/include/GLFW\
-	  -ID:/Development/OpenGL/Glew/glew-2.1.0/include/GL\
-	  -ID:/Development/OpenGL/Glm/glm-0.9.9.8/glm\
+INC = -ID:/MartinFW/Development/OpenGL/Glfw/include/GLFW\
+	  -ID:/MartinFW/Development/OpenGL/Glew/glew-2.1.0/include/GL\
+	  -ID:/MartinFW/Development/OpenGL/Glm/glm-0.9.9.8/glm\
 	  -ISrc/Game\
 	  -ISrc/Shader\
 	  -ISrc/Texture\
@@ -34,8 +34,8 @@ INC = -ID:/Development/OpenGL/Glfw/include/GLFW\
 	  -ISrc/Json
 
 ### LINKER FLAGS ###
-LDFLAGS = -LD:/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32 -lglew32s\
-		  -LD:/Development/OpenGL/Glfw/lib-mingw -lglfw3\
+LDFLAGS = -LD:/MartinFW/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32 -lglew32s\
+		  -LD:/MartinFW/Development/OpenGL/Glfw/lib-mingw -lglfw3\
 		  -lopengl32\
 		  -lgdi32
 

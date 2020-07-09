@@ -1,4 +1,5 @@
 #include "Errors.h"
+#include <cstdlib>
 #define GLM_FORCE_CTOR_INIT
 #define GLEW_STATIC
 #include "glew.h"
@@ -7,6 +8,7 @@
 #include "Game.h"
 #include "ResourceManager.h"
 
+#include<cmath>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
@@ -52,7 +54,7 @@ int main(int argc, char *argv[])
     {
         // Calculate delta time
         GLfloat currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
+        deltaTime = std::abs(currentFrame - lastFrame);
         lastFrame = currentFrame;
         glfwPollEvents();
 

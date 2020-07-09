@@ -4,80 +4,109 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "BallObject.h"
+#include "Texture.h"
+#include "fwd.hpp"
 #include "glfw3.h"
 #include<iostream>
 
-GLboolean CheckCollision(GameObject &one, GameObject &two) // AABB - AABB collision
+GLfloat CheckXCollision(GameObject &one, GameObject &two) // AABB - AABB collision
 {
-    // Collision x-axis?
-    bool collisionX = one.position.x + one.size.x >= two.position.x &&
-        two.position.x + two.size.x >= one.position.x;
-    // Collision y-axis?
-    bool collisionY = one.position.y + one.size.y >= two.position.y &&
-        two.position.y + two.size.y >= one.position.y;
-    // Collision only if on both axes
-    return collisionX && collisionY;
+	GLfloat penetration = 0.0f;
+	if (one.moveX == GameObject::LEFT) {
+		if (one.position.x <= two.position.x + two.size.x &&
+			one.position.x >= two.position.x) {
+			penetration = (two.position.x + two.size.x) - one.position.x;
+		}
+	}
+	if (one.moveX == GameObject::RIGHT) {
+		if (one.position.x + one.size.x >= two.position.x &&
+			one.position.x + one.size.x <= two.position.x + two.size.x) {
+			penetration = (one.position.x + one.size.x) - two.position.x;
+		}
+	}
+	return penetration;
 }
 
-/*GLint xPenetration(GameObject &one, GameObject &two)
+GLfloat CheckYCollision(GameObject &one, GameObject &two) // AABB - AABB collision
 {
-	if (one.direction == LEFT)
-	{
-		one.position.x -= (two.position.x + two.size.x) - one.position.x - 1;
+	GLfloat penetration = 0.0f;
+	if (one.moveY == GameObject::UP) {
+		if (one.position.y <= two.position.y + two.size.y &&
+			one.position.y >= two.position.y) {
+			penetration = (two.position.y + two.size.y) - one.position.y;
+		}
 	}
-	if (one.direction == RIGHT)
-	{
-		one.position.x += (one.position.x + one.size.x) - two.position.x - 1;
+	if (one.moveY == GameObject::DOWN) {
+		if (one.position.y + one.size.y >= two.position.y &&
+			one.position.y + one.size.y <= two.position.y + two.size.y) {
+			penetration = (one.position.y + one.size.y) - two.position.y;
+		}
 	}
+	return penetration;
 }
-
-GLint yPenetration(GameObject &one, GameObject &two)
-{
-	if (one.direction == UP)
-	{
-		one.position.y -= (two.position.y + two.size.y) - one.position.y - 1;
-	}
-	if (one.direction == DOWN)
-	{
-		one.position.y += (one.position.y + one.size.y) - two.position.y - 1;
-	}
-}*/
 
 void Game::doCollisions()
 {	bool collision = false;
+	GLfloat xcollision = 0.0f, ycollosion = 0.0f;
 	for(GameObject& obj : this->levels[this->level].Bricks) {
 		if (!obj.destroyed) {
-			if (CheckCollision(this->ball, obj) && (this->ball.directionY == UP || this->ball.directionY == DOWN)) {
+			xcollision = CheckXCollision(this->ball, obj);
+			ycollosion = CheckYCollision(this->ball, obj);
+			if (xcollision && ycollosion) {
 				if (!obj.isSolid) {
 					obj.destroyed = true;
 				}
-				std::cout<<"\nCOLLISION";
 				collision = true;
+				std::cout << "\nballx1: " <<this->ball.position.x << " ballx2: " << this->ball.position.x + this->ball.size.x;
+				std::cout << "\nbally1: " <<this->ball.position.y << " bally2: " << this->ball.position.y + this->ball.size.y;
+				std::cout << "\ntilex1: " <<obj.position.x << " tilex2: " << obj.position.x + obj.size.x;
+				std::cout << "\ntiley1: " <<obj.position.y << " tiley2: " << obj.position.y + obj.size.y;
+				std::cout << "\nxcollision: " << xcollision << " ycollosion: " << ycollosion;
+				if (this->ball.moveY == GameObject::UP) {
+					this->ball.position.y += ycollosion + 0.0001f;
+				} else {
+					this->ball.position.y -= ycollosion + 0.0001f;
+				}
+				if (this->ball.moveX == GameObject::LEFT) {
+					this->ball.position.x += xcollision + 0.0001f;
+				} else {
+					this->ball.position.x -= xcollision + 0.0001f;
+				}
 			}
 		}
 	}	
 	if (collision == true) {
-		std::cout<<"\nCOLLISION1";
-		if (this->ball.directionY == UP) {
-			this->ball.directionY = DOWN;
+		if (this->ball.moveY == GameObject::UP) {
+			this->ball.moveY = GameObject::DOWN;
 		} else {
-			this->ball.directionY = UP;
+			this->ball.moveY = GameObject::UP;
 		}
-		this->ball.velocity.x = -this->ball.velocity.x;
-		this->ball.velocity.y = -this->ball.velocity.y;
+		if (this->ball.moveX == GameObject::LEFT) {
+			this->ball.moveX = GameObject::RIGHT;
+		} else {
+			this->ball.moveX = GameObject::LEFT;
+		}
+		//this->ball.velocity.x = -this->ball.velocity.x;
+		//this->ball.velocity.y = -this->ball.velocity.y;
 	}
-	if (CheckCollision(this->ball, this->player) && !this->ball.stuck) {
+	xcollision = CheckXCollision(this->ball, this->player);
+	ycollosion = CheckYCollision(this->ball, this->player);
+	if (xcollision && ycollosion && !this->ball.stuck) {
+		if (this->ball.moveY == GameObject::UP) {
+			this->ball.moveY = GameObject::DOWN;
+		} else {
+			this->ball.moveY = GameObject::UP;
+		}
+		if (this->ball.moveX == GameObject::LEFT) {
+			this->ball.moveX = GameObject::RIGHT;
+		} else {
+			this->ball.moveX = GameObject::LEFT;
+		}
 	    GLfloat centerBoard = this->player.position.x + this->player.size.x / 2;
         GLfloat distance = (this->ball.position.x + this->ball.radius) - centerBoard;
         GLfloat percentage = distance / (this->player.size.x / 2);
-        // Then move accordingly
         GLfloat strength = 2.0f;
-        glm::vec2 oldVelocity = this->ball.velocity;
         this->ball.velocity.x = 100.0f * percentage * strength; 
-        //Ball->Velocity.y = -Ball->Velocity.y;
-        this->ball.velocity = glm::normalize(this->ball.velocity) * glm::length(oldVelocity); // Keep speed consistent over both axes (multiply by length of old velocity, so total strength is not changed)
-        // Fix sticky paddle
-        this->ball.velocity.y = -1 * abs(this->ball.velocity.y);				
 	}
 }
 
@@ -127,28 +156,34 @@ Error Game::init()
 	this->renderer.setShader(shader);
 	this->renderer.initRenderData();
 
-	GameLevel one, two, three, four;
-	one.load("Res/Levels/one.json", this->width, this->height / 2);
-	this->levels.push_back(one);
+	GameLevel levelOne;
+	CHECK(levelOne.load("Res/Levels/one.json", this->width, this->height / 2));
+	this->levels.push_back(levelOne);
 	this->level = 0;
+
 	player.position.x = (this->width - PLAYER_WIDTH) / 2;
 	player.position.y = this->height - PLAYER_HEIGHT;
 	player.size = glm ::vec2 (PLAYER_WIDTH, PLAYER_HEIGHT);
-	player.sprite = *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_PADDLE);
+	Texture2D* playerTexture = ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_PADDLE);
+	CHECK_ERR(!playerTexture, ERR_INV_VAL);
+	player.sprite = *playerTexture;
 	player.velocity = glm::vec2(700, 500);
 
 	ball.position.x = player.position.x + ((PLAYER_WIDTH - BALL_RADIUS*2) / 2);
 	ball.position.y = player.position.y - BALL_RADIUS*2;
 	ball.size = glm::vec2 (BALL_RADIUS*2, BALL_RADIUS*2);
-	ball.sprite = *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_AWESOME_FACE);
-	ball.velocity = glm::vec2(100.0f, -350.0f);
+	Texture2D* ballTexture = ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_AWESOME_FACE);
+	CHECK_ERR(!ballTexture, ERR_INV_VAL);
+	ball.sprite = *ballTexture;
+	ball.velocity = glm::vec2(100.0f, 350.0f);
 	ball.color = glm::vec3(0.0f, 0.6f, 0.8f);
+
 	return ERR_NO_ERR;
 }
 
 void Game::update(float dt)
 {
-	this->ball.move(dt, this->width);
+	this->ball.move(dt, this->width, this->height);
 	this->doCollisions();
 }
 
@@ -160,7 +195,7 @@ void Game::processInput(float dt)
 	    if (this->keys[GLFW_KEY_A]) {
 			if (player.position.x) {
 				if (velocity > player.position.x) {
-					velocity = 0;
+					velocity  = player.position.x;
 				}
 				player.position.x -= velocity;
 				if (this->ball.stuck) {
@@ -171,16 +206,21 @@ void Game::processInput(float dt)
 		if (this->keys[GLFW_KEY_D]) {
 			if (player.position.x + PLAYER_WIDTH < this->width) {
 				if (player.position.x + velocity + PLAYER_WIDTH > this->width) {
+					player.position.x = this->width - PLAYER_WIDTH;
 					velocity = 0;
 				}
 				player.position.x += velocity;
 				if (this->ball.stuck) {
 					this->ball.position.x += velocity;	
 				}
-			}	
+			} else {
+				player.position.x = this->width - PLAYER_WIDTH;
+			}
 		}
 		if (this->keys[GLFW_KEY_SPACE]) {
 			this->ball.stuck = false;
+			this->ball.moveX = GameObject::LEFT;
+			this->ball.moveY = GameObject::UP;
 		}
 	}
 }

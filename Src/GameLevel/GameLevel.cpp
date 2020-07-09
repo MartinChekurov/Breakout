@@ -1,6 +1,8 @@
 #include "GameLevel.h"
 #include "Errors.h"
 #include "Json.h"
+#include "ResourceManager.h"
+#include "Texture.h"
 
 #include <fstream>
 #include <sstream>
@@ -80,12 +82,17 @@ Error GameLevel::init(JSON_Value* level, GLuint levelWidth, GLuint levelHeight)
 			
 			if (visible) {
 				if (isSolid) {
-					GameObject obj(pos, size, *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_SOLID_BLOCK));
+					Texture2D* solidBlock = ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_SOLID_BLOCK);
+					CHECK_ERR(!solidBlock, ERR_INV_VAL);
+					GameObject obj(pos, size, *solidBlock, glm::vec3{1.0}, glm::vec2{0,0});
 					obj.isSolid = GL_TRUE;
 					this->Bricks.push_back(obj);
 				} else {
+					Texture2D* block = ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_BLOCK);
+					CHECK_ERR(!block, ERR_INV_VAL);
 					tileColor = glm::vec3(red, green, blue);
-					this->Bricks.push_back(GameObject(pos, size, *ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_BLOCK), tileColor));
+					GameObject obj(pos, size, *block, tileColor, glm::vec2{0,0});
+					this->Bricks.push_back(obj);
 				}
 			}
 		}

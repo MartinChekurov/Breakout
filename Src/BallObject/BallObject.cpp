@@ -1,4 +1,5 @@
 #include "BallObject.h"
+#include "GameObject.h"
 #include<iostream>
 
 BallObject::BallObject() 
@@ -7,15 +8,55 @@ BallObject::BallObject()
 BallObject::BallObject(glm::vec2 pos, GLfloat radius, glm::vec2 velocity, Texture2D sprite)
     :  GameObject(pos, glm::vec2(radius * 2, radius * 2), sprite, glm::vec3(1.0f), velocity), radius(radius), stuck(true) { }
 
-glm::vec2 BallObject::move(GLfloat dt, GLuint window_width)
+glm::vec2 BallObject::move(GLfloat dt, GLuint window_width, GLuint window_height)
 {
-    // If not stuck to player board
+	glm::vec2 velocity = this->velocity * dt;
     if (!this->stuck)
     {
-        // Move the ball
-        this->position += this->velocity * dt;
+		if (this->moveX == GameObject::LEFT) {
+			if (this->position.x) {
+				if (velocity.x > this->position.x) {
+					velocity.x  = this->position.x;
+				}
+				this->position.x -= velocity.x;
+			} else {
+				this->moveX = GameObject::RIGHT;
+			}
+		} else if (this->moveX == GameObject::RIGHT) {
+			if (this->position.x + this->size.x < window_width) {
+				if (this->position.x + velocity.x + this->size.x > window_width) {
+					this->position.x = window_width - this->size.x;
+					velocity.x = 0;
+				}
+				this->position.x += velocity.x;
+			} else {
+				this->position.x = window_width - this->size.x;
+				this->moveX = GameObject::LEFT;
+			}
+		}
+		if (this->moveY == GameObject::UP) {
+			if (this->position.y) {
+				if (velocity.y > this->position.y) {
+					velocity.y = this->position.y;
+				}
+				this->position.y -= velocity.y;
+			} else {
+				this->moveY = GameObject::DOWN;
+			}
+		} else if (this->moveY == GameObject::DOWN) {
+			if (this->position.y + this->size.y < window_height) {
+				if (this->position.y + velocity.y + this->size.y > window_height) {
+					this->position.y = window_height - this->size.y;
+					velocity.y = 0;
+				}
+				this->position.y += velocity.y;
+			} else {
+				this->position.y = window_height - this->size.y;
+				this->moveY = GameObject::UP;
+			}
+		}
+       /* this->position += this->velocity * dt;
         
-        // Then check if outside window bounds and if so, reverse velocity and restore at correct position
         if (this->position.x <= 0.0f)
         {
             this->velocity.x = -this->velocity.x;
@@ -30,13 +71,12 @@ glm::vec2 BallObject::move(GLfloat dt, GLuint window_width)
         {
             this->velocity.y = -this->velocity.y;
             this->position.y = 0.0f;
-        }
+        }*/
     }
-	this->setDirection();
+	//this->setDirection();
     return this->position;
 }
 
-// Resets the ball to initial Stuck position (if ball is outside window bounds)
 void BallObject::reset(glm::vec2 position, glm::vec2 velocity)
 {
     this->position = position;

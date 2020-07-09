@@ -16,7 +16,7 @@ Error ResourceManagerLoadShader(const Shader& shader, enum ResouceManagerShader 
 
 Shader* ResourceManagerGetShader(enum ResouceManagerShader id)
 {
-	CHECK_ERR(Shaders.size() <= id, nullptr);
+	CHECK_ERR(Shaders.size() <= id, NULL);
 	return &Shaders[id];
 }
 
@@ -28,7 +28,7 @@ Error ResourceManagerLoadTexture(const Texture2D& texture, enum ResourceManagerT
 
 Texture2D* ResourceManagerGetTexture(enum ResourceManagerTexture2D id)
 {
-	CHECK_ERR(Textures.size() <= id, nullptr);
+	CHECK_ERR(Textures.size() <= id, NULL);
 	return &Textures[id];
 }
 

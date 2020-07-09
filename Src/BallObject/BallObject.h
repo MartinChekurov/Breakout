@@ -15,7 +15,7 @@ public:
     GLboolean stuck;
     BallObject();
     BallObject(glm::vec2 pos, GLfloat radius, glm::vec2 velocity, Texture2D sprite);
-    glm::vec2 move(GLfloat dt, GLuint window_width);
+    glm::vec2 move(GLfloat dt, GLuint window_width, GLuint window_height);
     void reset(glm::vec2 position, glm::vec2 velocity);
 };
 
