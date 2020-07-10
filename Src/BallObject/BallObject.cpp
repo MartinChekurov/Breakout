@@ -1,5 +1,6 @@
 #include "BallObject.h"
 #include "GameObject.h"
+#include "Game.h"
 #include<iostream>
 
 BallObject::BallObject() 
@@ -44,16 +45,7 @@ glm::vec2 BallObject::move(GLfloat dt, GLuint window_width, GLuint window_height
 				this->moveY = GameObject::DOWN;
 			}
 		} else if (this->moveY == GameObject::DOWN) {
-			if (this->position.y + this->size.y < window_height) {
-				if (this->position.y + velocity.y + this->size.y > window_height) {
-					this->position.y = window_height - this->size.y;
-					velocity.y = 0;
-				}
-				this->position.y += velocity.y;
-			} else {
-				this->position.y = window_height - this->size.y;
-				this->moveY = GameObject::UP;
-			}
+			this->position.y += velocity.y;
 		}
     }
     return this->position;
@@ -61,7 +53,7 @@ glm::vec2 BallObject::move(GLfloat dt, GLuint window_width, GLuint window_height
 
 void BallObject::reset(glm::vec2 position, glm::vec2 velocity)
 {
-    this->position = position;
     this->velocity = velocity;
+    this->position = position;
     this->stuck = true;
 }

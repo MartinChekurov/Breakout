@@ -169,6 +169,9 @@ void Game::update(float dt)
 {
 	this->ball.move(dt, this->width, this->height);
 	this->doCollisions();
+	if (this->ball.position.y + this->ball.size.y >= this->height) {
+		this->reset();
+	}
 }
 
 void Game::processInput(float dt)
@@ -220,3 +223,13 @@ void Game::render()
     }
 }
 
+void Game::reset()
+{
+	this->player.position.x = (this->width - PLAYER_WIDTH) / 2;
+	this->player.position.y = this->height - PLAYER_HEIGHT;
+
+	this->ball.position.x = player.position.x + ((PLAYER_WIDTH - BALL_RADIUS*2) / 2);
+	this->ball.position.y = player.position.y - BALL_RADIUS*2;
+
+	this->ball.stuck = true;
+}
