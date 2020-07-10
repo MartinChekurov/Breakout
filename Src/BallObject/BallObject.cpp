@@ -55,25 +55,7 @@ glm::vec2 BallObject::move(GLfloat dt, GLuint window_width, GLuint window_height
 				this->moveY = GameObject::UP;
 			}
 		}
-       /* this->position += this->velocity * dt;
-        
-        if (this->position.x <= 0.0f)
-        {
-            this->velocity.x = -this->velocity.x;
-            this->position.x = 0.0f;
-        }
-        else if (this->position.x + this->size.x >= window_width)
-        {
-            this->velocity.x = -this->velocity.x;
-            this->position.x = window_width - this->size.x;
-        }
-        if (this->position.y <= 0.0f)
-        {
-            this->velocity.y = -this->velocity.y;
-            this->position.y = 0.0f;
-        }*/
     }
-	//this->setDirection();
     return this->position;
 }
 

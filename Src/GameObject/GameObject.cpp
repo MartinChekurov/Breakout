@@ -18,16 +18,3 @@ void GameObject::draw(SpriteRenderer &renderer)
     renderer.drawSprite(this->sprite, this->position, this->size, this->rotation, this->color);
 }
 
-void GameObject::setDirection()
-{
-	if (this->velocity.x >= 0) {
-		this->moveX = GameObject::RIGHT;
-	} else {
-		this->moveX = GameObject::LEFT;
-	}
-	if (this->velocity.y >= 0) {
-		this->moveY = GameObject::DOWN;
-	} else {
-		this->moveY = GameObject::UP;
-	}
-}

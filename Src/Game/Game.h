@@ -16,7 +16,7 @@
 #define PLAYER_WIDTH  (100)
 #define PLAYER_HEIGHT (20)
 
-#define BALL_RADIUS (12.5f)
+const glm::vec2 PLAYER_INITIAL_VELOCITY{700.0f, 700.0f};
 
 enum GameState
 {

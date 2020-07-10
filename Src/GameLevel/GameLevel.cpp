@@ -79,7 +79,6 @@ Error GameLevel::init(JSON_Value* level, GLuint levelWidth, GLuint levelHeight)
 			glm::vec2 pos(columnsWidth[y] * x, tileHeight * y);
 			glm::vec2 size(columnsWidth[y], tileHeight);
 			glm::vec3 tileColor = glm::vec3(1.0f);
-			
 			if (visible) {
 				if (isSolid) {
 					Texture2D* solidBlock = ResourceManagerGetTexture(RESOURCE_MANAGER_TEXTURE2D_SOLID_BLOCK);
