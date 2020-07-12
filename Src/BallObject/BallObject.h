@@ -8,9 +8,9 @@
 #include "SpriteRenderer.h"
 #include "GameObject.h"
 
-#define BALL_RADIUS (12.5f)
+#define BALL_RADIUS (20.0f)
 
-const glm::vec2 BALL_INITIAL_VELOCITY{400.0f, 400.0f};
+const glm::vec2 BALL_INITIAL_VELOCITY{500.0f, 500.0f};
 
 class BallObject : public GameObject
 {
@@ -20,7 +20,6 @@ public:
     BallObject();
     BallObject(glm::vec2 pos, GLfloat radius, glm::vec2 velocity, Texture2D sprite);
     glm::vec2 move(GLfloat dt, GLuint window_width, GLuint window_height);
-    void reset(glm::vec2 position, glm::vec2 velocity);
 };
 
 #endif

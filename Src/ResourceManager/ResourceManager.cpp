@@ -4,8 +4,8 @@
 #include <vector>
 
 
-static std::vector<Shader> Shaders{1};
-static std::vector<Texture2D> Textures{5};
+static std::vector<Shader> Shaders{10};
+static std::vector<Texture2D> Textures{10};
 
 Error ResourceManagerLoadShader(const Shader& shader, enum ResouceManagerShader id)
 {

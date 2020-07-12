@@ -22,7 +22,7 @@ public:
     Error load(const GLchar *file, GLuint levelWidth, GLuint levelHeight);
     void draw(SpriteRenderer &renderer);
     GLboolean isCompleted();
-
+	void reset();
 private:
     Error init(JSON_Value* level, GLuint levelWidth, GLuint levelHeight);
 };

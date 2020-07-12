@@ -31,10 +31,17 @@ void GameLevel::draw(SpriteRenderer &renderer)
 	}
 }
 
+void GameLevel::reset()
+{
+    for (GameObject &tile : this->Bricks) {
+		tile.destroyed = false;
+	}
+}
+
 GLboolean GameLevel::isCompleted()
 {
     for (GameObject &tile : this->Bricks) {
-        if (!tile.isSolid && !tile.destroyed) {
+        if (!tile.destroyed) {
             return GL_FALSE;
 		}
 	}

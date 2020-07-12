@@ -51,9 +51,3 @@ glm::vec2 BallObject::move(GLfloat dt, GLuint window_width, GLuint window_height
     return this->position;
 }
 
-void BallObject::reset(glm::vec2 position, glm::vec2 velocity)
-{
-    this->velocity = velocity;
-    this->position = position;
-    this->stuck = true;
-}

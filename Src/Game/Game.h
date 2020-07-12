@@ -8,13 +8,14 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
+#include "ParticleGenerator.h"
 #include "glew.h"
 #include "glfw3.h"
 
 #include "GameLevel.h"
 
-#define PLAYER_WIDTH  (100)
-#define PLAYER_HEIGHT (20)
+#define PLAYER_WIDTH  (150)
+#define PLAYER_HEIGHT (40)
 
 const glm::vec2 PLAYER_INITIAL_VELOCITY{700.0f, 700.0f};
 
