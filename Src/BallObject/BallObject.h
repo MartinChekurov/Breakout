@@ -8,9 +8,9 @@
 #include "SpriteRenderer.h"
 #include "GameObject.h"
 
-#define BALL_RADIUS (20.0f)
+#define BALL_RADIUS ((PLAYER_WIDTH) * 16.6f / 100)
 
-const glm::vec2 BALL_INITIAL_VELOCITY{500.0f, 500.0f};
+const glm::vec2 BALL_INITIAL_VELOCITY{250.0f, 250.0f};
 
 class BallObject : public GameObject
 {

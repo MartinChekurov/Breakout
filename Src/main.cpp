@@ -12,9 +12,6 @@
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
-const GLuint SCREEN_WIDTH = 1400;
-const GLuint SCREEN_HEIGHT = 1000;
-
 Game Breakout(SCREEN_WIDTH, SCREEN_HEIGHT);
 int main(int argc, char *argv[])
 {

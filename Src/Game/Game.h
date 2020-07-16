@@ -14,8 +14,10 @@
 
 #include "GameLevel.h"
 
-#define PLAYER_WIDTH  (150)
-#define PLAYER_HEIGHT (40)
+#define SCREEN_WIDTH (700)
+#define SCREEN_HEIGHT (500)
+#define PLAYER_WIDTH  ((SCREEN_WIDTH) * 12 / 100)
+#define PLAYER_HEIGHT ((SCREEN_HEIGHT) * 5 / 100)
 
 const glm::vec2 PLAYER_INITIAL_VELOCITY{700.0f, 700.0f};
 
@@ -34,6 +36,7 @@ public:
 	BallObject ball;
 	std::vector<GameLevel> levels;
 	GLuint level = 0;
+	GLuint maxLevels = 0;
     GameState state;	
     GLboolean keys[1024];
     GLuint width, height;
@@ -47,6 +50,8 @@ public:
     void update(GLfloat dt);
     void render();
 	void reset();
+	void resetPlayer();
+	void resetBall();
 
 private:
 	void doCollisions();

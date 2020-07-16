@@ -41,7 +41,7 @@ LDFLAGS = -LD:/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32\
 		  -LD:/Development/OpenGL/Glfw/lib-mingw\
 		  -LD:/Development/irrKlang-1.6.0/lib/Win32-gcc
 
-LDLIBS = -lglew32s -lglfw3 -lopengl32 -lgdi32 -lWinMM -lirrKlang
+LDLIBS = -lglew32s -lglfw3 -lopengl32 -lgdi32 -lirrKlang
 
 ### COMPILER FLAGS
 CFLAGS = $(INC)

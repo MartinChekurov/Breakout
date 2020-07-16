@@ -1,4 +1,5 @@
 #include "Errors.h"
+#include "GameLevel.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
 #include "Game.h"
@@ -120,6 +121,10 @@ Error Game::init()
 	Shader shader("Src/Shaders/sprite.vs", "Src/Shaders/sprite.frag");
 	Shader shaderParticle("Src/Shaders/particle.vs", "Src/Shaders/particle.frag");
 	glm::mat4 projection = glm::ortho(0.0f, (GLfloat)this->width, (GLfloat)this->height, 0.0f, -1.0f, 1.0f);
+	const GLchar* levels[2] = {
+		"Res/Levels/one.json",
+		"Res/Levels/two.json"
+	};
 	const GLchar* textures[6] = {
 		"Res/Textures/background2.jpg",
 		"Res/Textures/ball.png",
@@ -148,7 +153,7 @@ Error Game::init()
 	CHECK(shaderParticle.setMatrix4("projection", projection));
 	CHECK(ResourceManagerLoadShader(shaderParticle, RESOURCE_MANAGER_SHADER_PARTICLE));
 	
-	for (i = 0 ; i < 6 ; i++) {
+	for (i = 0 ; i < sizeof(textures)/sizeof(textures[0]) && i < sizeof(texturesIds)/sizeof(texturesIds[0]) ; i++) {
 		Texture2D texture(textures[i]);
 		CHECK(texture.load());
 		CHECK(texture.generate());
@@ -160,9 +165,13 @@ Error Game::init()
 	this->renderer.setShader(shader);
 	this->renderer.initRenderData();
 
-	GameLevel levelOne;
-	CHECK(levelOne.load("Res/Levels/one.json", this->width, this->height / 2));
-	this->levels.push_back(levelOne);
+	this->maxLevels = 0;
+	for (i = 0 ; i < sizeof(levels)/sizeof(levels[0]) ; i++) {
+		GameLevel level;
+		CHECK(level.load(levels[i], this->width, this->height));
+		this->levels.push_back(level);
+		this->maxLevels++;
+	}
 	this->level = 0;
 
 	player.position.x = (this->width - PLAYER_WIDTH) / 2;
@@ -192,9 +201,13 @@ void Game::update(float dt)
 	this->ball.move(dt, this->width, this->height);
 	this->doCollisions();
     Particles->Update(dt, this->ball, 2, glm::vec2(this->ball.radius / 2));
-	if ((this->ball.position.y + this->ball.size.y >= this->height) ||
-		this->levels[this->level].isCompleted()) {
+	if ((this->ball.position.y + this->ball.size.y) >= this->height) {
 		this->reset();
+	}
+	if (this->levels[this->level].isCompleted() && this->level < this->maxLevels) {
+		this->resetPlayer();
+		this->resetBall();
+		this->level++;
 	}
 }
 
@@ -250,12 +263,20 @@ void Game::render()
 
 void Game::reset()
 {
+	this->resetPlayer();
+	this->resetBall();
+	this->levels[this->level].reset();
+}
+
+void Game::resetPlayer()
+{
 	this->player.position.x = (this->width - PLAYER_WIDTH) / 2;
 	this->player.position.y = this->height - PLAYER_HEIGHT;
+}
 
+void Game::resetBall()
+{
 	this->ball.position.x = player.position.x + ((PLAYER_WIDTH - BALL_RADIUS*2) / 2);
 	this->ball.position.y = player.position.y - BALL_RADIUS*2;
 	this->ball.stuck = true;
-
-	this->levels[this->level].reset();
 }

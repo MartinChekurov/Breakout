@@ -12,8 +12,9 @@ SRC = Src/main\
 	  Src/GameObject/GameObject\
 	  Src/GameLevel/GameLevel\
 	  Src/BallObject/BallObject\
-	  Src/Json/Json
-
+	  Src/Json/Json\
+	  Src/ParticleGenerator/ParticleGenerator
+	  
 ### OBJECTS ###
 OBJ = $(addsuffix .o, $(addprefix $(BUILD)/, $(SRC)))
 
@@ -21,6 +22,7 @@ OBJ = $(addsuffix .o, $(addprefix $(BUILD)/, $(SRC)))
 INC = -ID:/MartinFW/Development/OpenGL/Glfw/include/GLFW\
 	  -ID:/MartinFW/Development/OpenGL/Glew/glew-2.1.0/include/GL\
 	  -ID:/MartinFW/Development/OpenGL/Glm/glm-0.9.9.8/glm\
+	  -ID:/MartinFW/Development/irrKlang-32bit-1.6.0/irrKlang-1.6.0/include\
 	  -ISrc/Game\
 	  -ISrc/Shader\
 	  -ISrc/Texture\
@@ -31,15 +33,15 @@ INC = -ID:/MartinFW/Development/OpenGL/Glfw/include/GLFW\
 	  -ISrc/GameLevel\
 	  -ISrc/BallObject\
 	  -ISrc/Errors\
-	  -ISrc/Json
+	  -ISrc/Json\
+	  -ISrc/ParticleGenerator
 
 ### LINKER FLAGS ###
-LDFLAGS = -LD:/MartinFW/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32 -lglew32s\
-		  -LD:/MartinFW/Development/OpenGL/Glfw/lib-mingw -lglfw3\
-		  -lopengl32\
-		  -lgdi32
+LDFLAGS = -LD:/MartinFW/Development/OpenGL/Glew/glew-2.1.0/lib/Release/Win32\
+		  -LD:/MartinFW/Development/OpenGL/Glfw/lib-mingw\
+		  -LD:/MartinFW/Development/irrKlang-32bit-1.6.0/irrKlang-1.6.0/lib/Win32-gcc
 
-LDLIBS = -lglew32s -lglfw3 -lopengl32 -lgdi32
+LDLIBS = -lglew32s -lglfw3 -lopengl32 -lgdi32 -lirrKlang
 
 ### COMPILER FLAGS
 CFLAGS = $(INC)
